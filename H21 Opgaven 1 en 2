@@ -1,0 +1,62 @@
+#Hoofdstuk 21 Opgave 1
+"""
+Opdracht is:
+schrijf een functie my_int_calc(f,f0,a,b,N,option) 
+f --> functie object 
+a en b zijn constanten, a < b
+N een positief geheel getal 
+Option -> 'rect', 'simp' of 'trap'
+x = (a,b) in N gelijke segmenten
+f0 is een beginwaarde 
+Output -> I --> benadering van de integraal van f(x) -> berekend door de input argument option.
+
+DUS option moet uit de trapezium regel, de Simpson regel , en rect regel bestaan. Ik denk dat we dan deze 3 methode eerst appart moeten definieren
+en de USER laten een keuze maken tussen deze drie methoden.
+Ik weet even nog niet wat de rect regel is.
+We moeten de user een functie laten definieren?
+
+Ik begrijp even niet wat f0 is?
+
+"""
+
+"""
+Enkelvoudige trapezium regel:
+I = (b-a)/2 * ((f(a)+f(b))
+
+Samengestelde Trapezium regel:
+h = (b-a)/2
+I = h/2 * (f(x0) + f(xn)+ 2 * SOMMATIE[i=1 --> n-1](f(xi)))
+""" 
+# Samengestelde Trapezium methode 
+
+# Defenieer een functie om te integreren 
+f = input("Write out a function:", )
+def samtrap(f,x0,xn,n):
+    # Bereken de stap grootte 
+    h = (xn - x0) / n
+    
+    # Vindt de som 
+    integration = f(x0) + f(xn)
+    
+    # Volgens de Samengestelde Trap regel --> de SOMMATIE van f(x1) naar f(x_n-1) maal 2 hebben we ook nodig 
+    for i in range(1,n):
+        k = x0 + i*h
+        integration = integration + 2 * f(k)
+    
+    # Finding final integration value
+    integration = integration * h/2
+    
+    return integration
+    
+# De user input
+lower_limit = float(input("Enter lower limit of integration: "))
+upper_limit = float(input("Enter upper limit of integration: "))
+sub_interval = int(input("Enter number of sub intervals: "))
+
+# roep samtrap() methode terug en krijg de resultaat 
+result = samtrap(f,lower_limit, upper_limit, sub_interval)
+print("Integration result by Trapezoidal method is: %0.6f" % (result) )
+
+
+
+#def my_int_calc(f,f0,a,b,N,option):
